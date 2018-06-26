@@ -14,7 +14,7 @@ var Game = function (xSize, ySize) {
     this.target = new ElementControl('target-text', 0);
     this.goal = new ElementControl('goal-text', 25);
     this.restartButton = new ElementControl('restart-button', 'New Game');
-    this.gobackButton = new ElementControl('goback-button', 'Back');
+    this.sourceButton = new ElementControl('source-button', 'SRC');
     this.gridCover = new ElementControl('grid-cover', '');
 
     this.goal.getElement().addEventListener('click', function () {
@@ -30,8 +30,8 @@ var Game = function (xSize, ySize) {
                 game.start();
     }, false);
 
-    this.gobackButton.getElement().addEventListener('click', function () {
-        location.href = 'http://web.present.kim';
+    this.sourceButton.getElement().addEventListener('click', function () {
+        location.href = 'https://github.com/PresentKim/1to25';
     }, false);
 
     document.getElementById('cheat-panel').addEventListener('click', function () {
