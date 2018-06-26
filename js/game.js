@@ -47,11 +47,11 @@ var Game = function (xSize, ySize) {
 Game.prototype.start = function () {
     if (this.intervalId == null)
         this.intervalId = setInterval(function () {
-            if (this.started) {
-                var time = new Date().getTime() - this.countDownDate;
-                this.playTime.setData(time);
-                if (this.bestTime.getData() === 0)
-                    this.bestTime.setData(time);
+            if (game.started) {
+                var time = new Date().getTime() - game.countDownDate;
+                game.playTime.setData(time);
+                if (game.bestTime.getData() === 0)
+                    game.bestTime.setData(time);
             }
         }, 10);
     this.started = true;
