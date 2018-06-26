@@ -27,7 +27,7 @@ var DefaultFomatter = function (data) {
 };
 
 var CellFomatter = function (data) {
-    return data == 0 ? '' : data;
+    return data === 0 ? '' : data;
 };
 
 var TimeFomatter = function (data) {

@@ -96,8 +96,8 @@ Game.prototype.stop = function () {
 Game.prototype.clickCell = function (id) {
     if (game.started) {
         var cell = game.grid.cells[id];
-        if (game.target.getData() == cell.getData()) {
-            if (game.goal.getData() == game.pre_goal && cell.getData() <= game.pre_goal) {
+        if (game.target.getData() === cell.getData()) {
+            if (game.goal.getData() === game.pre_goal && cell.getData() <= game.pre_goal) {
                 cell.getElement().disabled = 'true';
                 cell.getElement().style.animation = '';
                 cell.getElement().style.animation = 'cell-remove 2s forwards';
@@ -105,7 +105,7 @@ Game.prototype.clickCell = function (id) {
                 replace: while (true) {
                     var rand = Math.ceil(Math.random() * 25) + game.pre_goal;
                     for (var i = 0; i < game.grid.length; i++)
-                        if (game.grid.cells[i].getData() == rand)
+                        if (game.grid.cells[i].getData() === rand)
                             continue replace;
                     cell.setData(rand);
                     cell.getElement().disabled = 'true';
@@ -117,10 +117,10 @@ Game.prototype.clickCell = function (id) {
                 }
             }
 
-            if (game.target.getData() == game.pre_goal)
+            if (game.target.getData() === game.pre_goal)
                 game.pre_goal += 25;
-            if (game.target.getData() == game.goal.getData()) {
-                if (game.bestTime.getData() == 0 || game.bestTime.getData() > game.playTime.getData())
+            if (game.target.getData() === game.goal.getData()) {
+                if (game.bestTime.getData() === 0 || game.bestTime.getData() > game.playTime.getData())
                     game.bestTime.setData(new Date().getTime() - game.countDownDate);
                 game.gridCover.getElement().style.animation = '';
                 setTimeout(function () {
