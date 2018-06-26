@@ -6,11 +6,11 @@ var ElementControl = function (elementId, data, fomatter, filter) {
     this.setData(data ? data : 0);
 };
 
-ElementControl.prototype.setData = function (data, ignore, fomatter) {
-    this.data = data;
-    if (!ignore) {
-        this.element.innerText = isFunction(fomatter) ? fomatter(data) : this.fomatter(data);
+ElementControl.prototype.setData = function (data, updateOnlyText, fomatter) {
+    if (updateOnlyText !== false){
+        this.data = data;
     }
+    this.element.innerText = isFunction(fomatter) ? fomatter(data) : this.fomatter(data);
 };
 
 ElementControl.prototype.getData = function () {
