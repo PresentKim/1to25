@@ -51,7 +51,7 @@ Game.prototype.start = function () {
                 var time = new Date().getTime() - game.countDownDate;
                 game.playTime.setData(time);
                 if (game.bestTime.getData() === 0)
-                    game.bestTime.setData(time);
+                    game.bestTime.setData(time, false);
             }
         }, 10);
     this.started = true;
