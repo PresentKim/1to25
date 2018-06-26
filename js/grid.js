@@ -7,11 +7,11 @@ Cell.prototype.setData = function (data) {
     this.control.setData(data);
 };
 
-Cell.prototype.getData = function (data) {
+Cell.prototype.getData = function () {
     return this.control.getData();
 };
 
-Cell.prototype.getElement = function (data) {
+Cell.prototype.getElement = function () {
     return this.control.element;
 };
 
