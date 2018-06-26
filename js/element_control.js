@@ -1,8 +1,7 @@
 // Element Control
-var ElementControl = function (elementId, data, fomatter, filter) {
+var ElementControl = function (elementId, data, fomatter) {
     this.element = document.getElementById(elementId);
     this.fomatter = isFunction(fomatter) ? fomatter : DefaultFomatter;
-    this.filter = isFunction(filter) ? filter : DefaultFilter;
     this.setData(data ? data : 0);
 };
 
@@ -41,11 +40,6 @@ var TimeFomatter = function (data) {
         pad2(Math.floor(data % (1000 * 60) / 1000)) + ':' +
         pad2(Math.floor(data % 1000 / 10))
     );
-};
-
-// Filter
-var DefaultFilter = function (data) {
-    return data;
 };
 
 // other functions
