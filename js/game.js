@@ -113,7 +113,7 @@ Game.prototype.clickCell = function (id) {
                     setTimeout(function () {
                         cell.getElement().style.animation = 'cell-change 2s forwards';
                     }, 10);
-                    break replace;
+                    break;
                 }
             }
 
