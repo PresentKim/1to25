@@ -1,3 +1,2 @@
-# [PresentKim.github.io](http://web.present.kim)
-
-## First game is [1to25](http://web.present.kim/1to25)
+# [1to25](http://present.kim/1to25/)
+**Remove panel from 1 to 25 in order!**
