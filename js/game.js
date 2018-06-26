@@ -128,6 +128,7 @@ Game.prototype.clickCell = function (id) {
                     game.gridCover.setData('End!');
                 }, 10);
                 game.stop();
+                return;
             }
             game.target.setData(game.target.getData() + 1);
         }
