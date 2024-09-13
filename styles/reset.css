@@ -3,10 +3,11 @@
 *:before {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Micro 5", Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  font-style: normal;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
