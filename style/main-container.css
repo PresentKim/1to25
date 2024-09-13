@@ -6,37 +6,38 @@
 @import url(mobile/grid-container.css) only screen and (max-width: 1025px);
 
 * {
-    color: #EEEEEE;
-    font-family: Arial, sans-serif;
-    cursor: default;
-    -ms-user-select: none;
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    text-align: center;
+  color: #eeeeee;
+  font-family: Arial, sans-serif;
+  cursor: default;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: center;
 }
 
 body {
-    /* FloralWhite; */
-    background: #FFFAF0;
+  /* FloralWhite; */
+  background: #fffaf0;
 }
 
 #container {
-    width: 500px;
-    margin: 10px auto;
+  width: 500px;
+  margin: 10px auto;
 }
 
-.flex-row, .flex-column {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+.flex-row,
+.flex-column {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .flex-row {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .flex-column {
-    flex-direction: column;
+  flex-direction: column;
 }

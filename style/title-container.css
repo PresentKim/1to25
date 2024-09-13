@@ -1,111 +1,97 @@
 @charset "UTF-8";
-/* 타이틀 컨테이너 */
 
 #title-container {
-    margin: 0;
+  margin: 0;
 }
 
-/* 타이틀 텍스트 */
-
 #title-text {
-    /* DimGray; */
-    color: #696969;
-    margin: 0;
-    height: 50px;
-    font-size: 50px;
-    font-weight: bold;
-    text-align: center;
+  /* DimGray; */
+  color: #696969;
+  margin: 0;
+  height: 50px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
 }
 
 #title-text:hover {
-    animation-name: pulse;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
-
-/* 패널 */
 
 .panel {
-    flex: 1;
-    position: relative;
-    background: #998877;
-    height: 40px;
-    margin: 3px;
-    padding: 5px;
-    font-size: 40px;
-    font-weight: bold;
-    border-radius: 10px;
+  flex: 1;
+  position: relative;
+  background: #998877;
+  height: 40px;
+  margin: 3px;
+  padding: 5px;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
-/* 시간 패널 */
-
-.titled-text, #target-text {
-    float: right;
+.titled-text,
+#target-text {
+  float: right;
 }
 
 .titled-before {
-    float: left;
-    font-size: 20px;
+  float: left;
+  font-size: 20px;
 }
 
-/* 타겟 패널 */
-
 #target-text {
-    float: right;
+  float: right;
 }
 
 #goal-text {
-    position: absolute;
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
+  position: absolute;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #goal-text::before {
-    font-size: 15px;
-    float: left;
-    content: 'TARGET to ';
+  font-size: 15px;
+  float: left;
+  content: "TARGET to ";
 }
 
-/* 버튼 컨테이너 */
-
 #button-container {
-    flex: 1;
+  flex: 1;
 }
 
 .button {
-    background: #8F7766;
-    font-size: 25px;
-    cursor: pointer;
+  background: #8f7766;
+  font-size: 25px;
+  cursor: pointer;
 }
 
 .button:hover {
-    animation-name: pulse;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 #restart-button {
-    flex: 2;
+  flex: 2;
 }
 
 #goback-button {
-    flex: 1;
+  flex: 1;
 }
-
-/* 인트로 */
 
 #intro {
-    /* DimGray; */
-    color: #696969;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: left;
+  /* DimGray; */
+  color: #696969;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
 }
 
-/* 치트패널 */
-
 #cheat-panel {
-    position: fixed;
-    display: none;
+  position: fixed;
+  display: none;
 }

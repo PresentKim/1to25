@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>1 to 25</title>
 
-<head>
-	<meta charset='utf-8'>
-	<title>1 to 25</title>
+    <link href="style/main-container.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="meta/favicon.ico" />
 
-	<link href='style/main-container.css' rel='stylesheet' type='text/css'>
-	<link rel='shortcut icon' href='meta/favicon.ico'>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+  </head>
 
-	<meta name='HandheldFriendly' content='True'>
-	<meta name='MobileOptimized' content='320'>
-	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui'>
-</head>
-
-<body>
-	<div id='cheat-panel' class='panel'>C</div>
-	<div id='container' class='flex-column'>
-		<div id='title-container' class='flex-column'>
-			<div id='title-text'>1 to 25</div>
-			<div class='flex-row'>
-				<div id='play-time-panel' class='panel'>
-					<div class='titled-before'>TIME</div>
-					<span id='play-time-text' class='titled-text'></span>
-				</div>
-				<div id='best-time-panel' class='panel'>
-					<div class='titled-before'>BEST</div>
-					<span id='best-time-text' class='titled-text'></span>
-				</div>
-			</div>
-			<div class='flex-row'>
-				<div id='target-panel' class='panel'>
-					<div id='goal-text' class='titled-before'></div>
-					<div id='target-text' class='titled-text'></div>
-				</div>
-				<div id='button-container' class='flex-row'>
-					<div id='restart-button' class='panel button'></div>
-					<div id='source-button' class='panel button'></div>
-				</div>
-			</div>
-			<span id='intro'>● Remove panel from 1 to 25 in order!</span>
-		</div>
-		<div id='grid-container' class='flex-column'>
-			<div id='grid-cover' class='flex-column'>
-				<div id='cover-restart-button' class='panel button'></div>
-			</div>
-		</div>
-	</div>
-	<script src='js/element_control.js'></script>
-	<script src='js/grid.js'></script>
-	<script src='js/game.js'></script>
-	<script src='js/app.js'></script>
-</body>
-
+  <body>
+    <div id="cheat-panel" class="panel">C</div>
+    <div id="container" class="flex-column">
+      <div id="title-container" class="flex-column">
+        <div id="title-text">1 to 25</div>
+        <div class="flex-row">
+          <div id="play-time-panel" class="panel">
+            <div class="titled-before">TIME</div>
+            <span id="play-time-text" class="titled-text"></span>
+          </div>
+          <div id="best-time-panel" class="panel">
+            <div class="titled-before">BEST</div>
+            <span id="best-time-text" class="titled-text"></span>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div id="target-panel" class="panel">
+            <div id="goal-text" class="titled-before"></div>
+            <div id="target-text" class="titled-text"></div>
+          </div>
+          <div id="button-container" class="flex-row">
+            <div id="restart-button" class="panel button"></div>
+            <div id="source-button" class="panel button"></div>
+          </div>
+        </div>
+        <span id="intro">● Remove panel from 1 to 25 in order!</span>
+      </div>
+      <div id="grid-container" class="flex-column">
+        <div id="grid-cover" class="flex-column">
+          <div id="cover-restart-button" class="panel button"></div>
+        </div>
+      </div>
+    </div>
+    <script src="js/element_control.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

@@ -1,87 +1,94 @@
-body{
-	width: 95vmin;
-	margin: 0 margin;
-	background-color: #3B4252;
-	color: #D8DEE9;
-	text-align: center;
-	user-select: none;
+body {
+  width: 95vmin;
+  margin: 0 margin;
+  background-color: #3b4252;
+  color: #d8dee9;
+  text-align: center;
+  user-select: none;
 }
 
-
-#title{
-	width: 85vmin; height:85vmin;
-	margin: 1vmin;
-	font-size: 5vmin;
+#title {
+  width: 85vmin;
+  height: 85vmin;
+  margin: 1vmin;
+  font-size: 5vmin;
 }
 
-#title g, #board g{
-	transform-origin: center;
-	transform-box: fill-box;
-	
-	transition: transform .75s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+#title g,
+#board g {
+  transform-origin: center;
+  transform-box: fill-box;
+
+  transition: transform 0.75s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-#title g>rect{
-	width: 42vmin; height: 7vmin;
-	rx: 1gvmin;
-	fill: #434C5E;
+#title g > rect {
+  width: 42vmin;
+  height: 7vmin;
+  rx: 1gvmin;
+  fill: #434c5e;
 }
 
-#title g>text{
-	font-size: 6vmin;
-	font-weight: bold;
-	text-anchor: middle;
-	fill: #D8DEE9;
+#title g > text {
+  font-size: 6vmin;
+  font-weight: bold;
+  text-anchor: middle;
+  fill: #d8dee9;
 }
 
-#title g:ntd-child(3).startbtn>text{
-	cursor: grab;
-	transform-origin: center;
-	transform-box: fill-box;
-	animation: .75s heartbeat infinite;
+#title g:ntd-child(3).startbtn > text {
+  cursor: grab;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: 0.75s heartbeat infinite;
 }
 
-@keyframe heartbeat{
-	from	{ transform: scale(1);	}
-	50%			{ transform: scale(1);	}
+@keyframes heartbeat {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
 }
 
-
-
-#board{
-	width: 80vmin; height: 80vmin;
-	border: solid 1vmin #434C5E;
-	border-radius: 5vmin;
+#board {
+  width: 80vmin;
+  height: 80vmin;
+  border: solid 1vmin #434c5e;
+  border-radius: 5vmin;
 }
 
-#board g{
-	width: 14vmin; height: 14vmin;
+#board g {
+  width: 14vmin;
+  height: 14vmin;
 }
 
-#board g>rect{
-	width: inherit; height: inherit;
-	rx: 3vmin;
-	fill: #434C5E;
+#board g > rect {
+  width: inherit;
+  height: inherit;
+  rx: 3vmin;
+  fill: #434c5e;
 }
 
-#board g.enable{
-	cursor: grab;
-	transform: scale(1);
+#board g.enable {
+  cursor: grab;
+  transform: scale(1);
 }
 
-#board g.enable:hover>rect{
-	stroke: aquamarine;
-	stroke-width: 0.5vmin;
+#board g.enable:hover > rect {
+  stroke: aquamarine;
+  stroke-width: 0.5vmin;
 }
 
-#board g.enable:active>rect{
-	stroke: aqua;
-	stroke-width: 0.75vmin;
+#board g.enable:active > rect {
+  stroke: aqua;
+  stroke-width: 0.75vmin;
 }
 
-#board g>text{
-	font-size: 10vmin;
-	font-family: fantasy;
-	text-anchor: middle;
-	fill: #D8DEE9;
+#board g > text {
+  font-size: 10vmin;
+  font-family: fantasy;
+  text-anchor: middle;
+  fill: #d8dee9;
 }

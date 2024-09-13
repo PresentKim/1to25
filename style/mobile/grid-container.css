@@ -1,40 +1,40 @@
 @charset "UTF-8";
 #grid-container {
-    height: 70vmin;
-    min-height: 70vmin;
-    width: 70vmin;
-    margin: 1vmin auto;
-    border-radius: 1vmin;
+  height: 70vmin;
+  min-height: 70vmin;
+  width: 70vmin;
+  margin: 1vmin auto;
+  border-radius: 1vmin;
 }
 
 .grid-row {
-    height: 12vmin;
+  height: 12vmin;
 }
 
 .grid-cell {
-    font-size: 9vmin;
-    border-radius: 1vmin;
+  font-size: 9vmin;
+  border-radius: 1vmin;
 }
 
 @media screen and (max-width: 720px) {
-    #container {
-        width: 90vw;
-        min-width: 90vw;
-        max-width: 90vw;
-    }
+  #container {
+    width: 90vw;
+    min-width: 90vw;
+    max-width: 90vw;
+  }
 
-    #grid-container {
-        height: 90vw;
-        width: 90vw;
-        min-height: 90vw;
-        min-width: 90vw;
-    }
+  #grid-container {
+    height: 90vw;
+    width: 90vw;
+    min-height: 90vw;
+    min-width: 90vw;
+  }
 
-    .grid-row {
-        height: 16vw;
-    }
+  .grid-row {
+    height: 16vw;
+  }
 
-    .grid-cell {
-        font-size: 12vw;
-    }
+  .grid-cell {
+    font-size: 12vw;
+  }
 }

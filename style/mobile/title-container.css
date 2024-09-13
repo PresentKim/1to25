@@ -2,76 +2,77 @@
 /* 컨테이너 */
 
 #container {
-    height: 98vmin;
-    min-height: 98vmin;
-    max-height: 98vmin;
-    width: 70vmin;
-    min-width: 70vmin;
-    max-width: 70vmin;
-    margin: 1vmin auto;
+  height: 98vmin;
+  min-height: 98vmin;
+  max-height: 98vmin;
+  width: 70vmin;
+  min-width: 70vmin;
+  max-width: 70vmin;
+  margin: 1vmin auto;
 }
 
 #title-container {
-    height: 25vmin;
-    min-height: 25vmin;
+  height: 25vmin;
+  min-height: 25vmin;
 }
 
 /* 타이틀 텍스트 */
 
 #title-text {
-    height: 7vmin;
-    font-size: 7vmin;
-    line-height: 7vmin;
+  height: 7vmin;
+  font-size: 7vmin;
+  line-height: 7vmin;
 }
 
 #title-text:hover {
-    animation-name: pulse;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 /* 패널 */
 
 .panel {
-    max-height: 5vmin;
-    margin: 0.5vmin;
-    padding: 0.5vmin;
-    font-size: 7vmin;
-    border-radius: 1vmin;
+  max-height: 5vmin;
+  margin: 0.5vmin;
+  padding: 0.5vmin;
+  font-size: 7vmin;
+  border-radius: 1vmin;
 }
 
 /* 시간 패널 */
 
-.titled-text, #target-text {
-    font-size: 4.5vmin;
+.titled-text,
+#target-text {
+  font-size: 4.5vmin;
 }
 
 .titled-before {
-    font-size: 2vmin;
+  font-size: 2vmin;
 }
 
 /* 타겟 패널 */
 
 #goal-text {
-    font-size: 2.5vmin;
+  font-size: 2.5vmin;
 }
 
 #goal-text::before {
-    font-size: 1.5vmin;
+  font-size: 1.5vmin;
 }
 
 /* 버튼 컨테이너 */
 
 #button-container {
-    flex: 1;
+  flex: 1;
 }
 
 .button {
-    font-size: 3.5vmin;
+  font-size: 3.5vmin;
 }
 
 /* 인트로 */
 
 #intro {
-    font-size: 2.5vmin;
+  font-size: 2.5vmin;
 }
