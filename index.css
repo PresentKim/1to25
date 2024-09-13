@@ -2,35 +2,11 @@
 
 @import url(./styles/reset.css);
 @import url(./styles/utilities.css);
+@import url(./styles/container.css);
 
 body {
   color: #eeeeee;
-  background: #fffaf0;
-}
-
-#container {
-  width: 500px;
-  margin: 10px auto;
-}
-
-#title-container {
-  margin: 0;
-}
-
-#title-text {
-  /* DimGray; */
-  color: #696969;
-  margin: 0;
-  height: 50px;
-  font-size: 50px;
-  font-weight: bold;
-  text-align: center;
-}
-
-#title-text:hover {
-  animation-name: pulse;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+  background: #fbf2eb;
 }
 
 .panel {
@@ -111,8 +87,8 @@ body {
 
 #grid-container {
   background: #baaaa0;
-  height: 500px;
-  width: 500px;
+  width: 100%;
+  max-width: 568px;
   margin: 5px auto;
   border-radius: 10px;
 }
@@ -157,8 +133,6 @@ body {
   position: absolute;
   background: #777777;
   opacity: 0;
-  height: inherit;
-  width: inherit;
   border-radius: 10px;
   pointer-events: none;
   justify-content: space-around;

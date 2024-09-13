@@ -14,3 +14,8 @@
 .flex-column {
   flex-direction: column;
 }
+
+.pixelart {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+}
