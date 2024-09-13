@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.flex-row,
+.flex-column {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}

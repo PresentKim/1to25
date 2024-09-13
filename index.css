@@ -1,35 +1,11 @@
 @charset "UTF-8";
 
-* {
-  color: #eeeeee;
-  font-family: Arial, sans-serif;
-  cursor: default;
-  -ms-user-select: none;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  text-align: center;
-}
+@import url(./styles/reset.css);
+@import url(./styles/utilities.css);
 
 body {
-  /* FloralWhite; */
+  color: #eeeeee;
   background: #fffaf0;
-}
-
-.flex-row,
-.flex-column {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-column {
-  flex-direction: column;
 }
 
 #container {
