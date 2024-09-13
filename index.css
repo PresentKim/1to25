@@ -9,6 +9,11 @@ body {
   background: #fbf2eb;
 }
 
+#game {
+  width: 100%;
+  padding: 3rem 1rem;
+}
+
 .panel {
   flex: 1;
   position: relative;
