@@ -15,7 +15,6 @@
 
 html {
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 
 html body[data-scroll-locked] {
