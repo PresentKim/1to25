@@ -6,7 +6,6 @@
   max-width: 768px;
   margin: 2rem auto;
   border: 0.25rem solid #ede4da;
-  z-index: -1;
 }
 
 #container-background {
@@ -15,7 +14,6 @@
   min-width: 100%;
   border: 0.25rem solid #353540;
   background: #bdaa97;
-  z-index: -1;
 }
 
 #container-background::before {
@@ -71,5 +69,4 @@
 #container {
   width: 100%;
   padding: 2rem;
-  z-index: 10;
 }

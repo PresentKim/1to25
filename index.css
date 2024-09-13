@@ -129,7 +129,6 @@ body {
 }
 
 #grid-cover {
-  z-index: 100;
   position: absolute;
   background: #777777;
   opacity: 0;
