@@ -9,14 +9,6 @@
   z-index: -1;
 }
 
-#container-background #title-image {
-  position: absolute;
-  top: -2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14rem;
-}
-
 #container-background {
   position: absolute;
   min-height: 100%;
@@ -66,6 +58,14 @@
   bottom: -0.0625rem;
   right: -0.0625rem;
   transform: rotate(180deg);
+}
+
+#container-background #title-image {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14rem;
 }
 
 #container {
