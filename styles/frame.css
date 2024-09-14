@@ -4,6 +4,7 @@
   --frame-width: 1rem;
   border-image: var(--frame-source) var(--frame-slice) fill / var(--frame-width)
     var(--frame-width) var(--frame-width) var(--frame-width);
+  border-image-repeat: repeat;
 }
 
 .frame.desc-blue {
@@ -32,5 +33,5 @@
 
 .frame.panel {
   --frame-source: url(../assets/frame-panel.png);
-  --frame-slice: 10 10 10 10;
+  --frame-slice: 9 9 9 9;
 }
