@@ -35,3 +35,8 @@
   --frame-source: url(../assets/frame-panel.png);
   --frame-slice: 9 9 9 9;
 }
+
+.frame.progress {
+  --frame-source: url(../assets/progress-bar-background.png);
+  --frame-slice: 3 3 3 3;
+}
