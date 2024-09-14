@@ -39,29 +39,30 @@
 }
 
 #container-border img {
+  --inset: -0.0625rem;
   position: absolute;
   width: 2rem;
 }
 
 #container-border img:nth-child(1) {
-  top: -0.0625rem;
-  left: -0.0625rem;
+  top: var(--inset);
+  left: var(--inset);
 }
 
 #container-border img:nth-child(2) {
-  top: -0.0625rem;
-  right: -0.0625rem;
+  top: var(--inset);
+  right: var(--inset);
   transform: rotate(90deg);
 }
 
 #container-border img:nth-child(3) {
-  bottom: -0.0625rem;
-  left: -0.0625rem;
+  bottom: var(--inset);
+  left: var(--inset);
   transform: rotate(270deg);
 }
 
 #container-border img:nth-child(4) {
-  bottom: -0.0625rem;
-  right: -0.0625rem;
+  bottom: var(--inset);
+  right: var(--inset);
   transform: rotate(180deg);
 }
