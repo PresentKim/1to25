@@ -283,7 +283,7 @@ var game = new Game(5, 5);
 const progressBar = document.getElementById("progress-bar");
 progressBar.addEventListener("click", (event) => {
   const box = progressBar.getBoundingClientRect();
-  const clickX = event.clientX - box.x + box.width * 0.05; // Add padding of 5% of the width
+  const clickX = event.clientX - box.x + box.width * 0.025; // Add padding of 5% of the width
   const progress = Math.min(100, Math.max(0, (clickX / box.width) * 100));
   setProgress(progress);
 });

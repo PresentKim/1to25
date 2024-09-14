@@ -10,13 +10,13 @@
 }
 
 #progress-bar::after {
-  --padding-x: 5%;
+  --padding-x: 2.5%;
   content: "";
   position: absolute;
-  top: 36%;
+  top: 40%;
   left: calc(var(--padding-x));
   width: calc(var(--progress) - var(--padding-x) * 2);
-  height: 28%;
+  height: 20%;
   background-color: #8b9150;
   transition: width 0.3s ease-out;
 }
