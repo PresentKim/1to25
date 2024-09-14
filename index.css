@@ -4,6 +4,7 @@
 @import url(./styles/reset.css);
 @import url(./styles/utilities.css);
 @import url(./styles/container.css);
+@import url(./styles/progress-bar.css);
 
 body {
   color: #eeeeee;

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#progress-bar {
+  --progress: 100%;
+  position: relative;
+  width: 100%;
+  min-width: 10rem;
+  margin: 0 auto;
+  height: fit-content;
+}
+
+#progress-bar::after {
+  --padding-x: 5%;
+  content: "";
+  position: absolute;
+  top: 36%;
+  left: calc(var(--padding-x));
+  width: calc(var(--progress) - var(--padding-x) * 2);
+  height: 28%;
+  background-color: #8b9150;
+  transition: width 0.3s ease-out;
+}
+
+#progress-bar-background {
+  width: 100%;
+}
