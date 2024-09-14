@@ -69,10 +69,10 @@ var Game = function (xSize, ySize) {
       .getElement()
       .addEventListener("click", this.clickCell.bind(null, i), false);
 
-  this.playTime = new ElementControl("play-time-text", 0, TimeFomatter);
-  this.bestTime = new ElementControl("best-time-text", 0, TimeFomatter);
-  this.target = new ElementControl("target-current", 0);
-  this.goal = new ElementControl("target-goal", 25);
+  this.playTime = new ElementControl("play-time", 0, TimeFomatter);
+  this.bestTime = new ElementControl("best-time", 0, TimeFomatter);
+  this.target = new ElementControl("target", 0);
+  this.goal = new ElementControl("goal", 25);
   this.startButton = new ElementControl("start-button", "START");
   this.gridCover = new ElementControl("grid-cover", "");
   this.progressBar = document.getElementById("progress-bar");

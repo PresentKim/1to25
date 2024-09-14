@@ -13,33 +13,37 @@
   <body class="pixelart" data-game-start="false">
     <div id="cheat-panel" class="panel">C</div>
     <div id="container">
-      <div id="game-header">
-        <div class="game-header-item frame-blue">
-          <sup>TIME</sup>
-          <span id="play-time-text">00:00:00</span>
+      <header id="game-header">
+        <div
+          id="play-time"
+          class="game-header-item frame-blue"
+          data-name="time"
+        >
+          00:00:00
         </div>
-        <div class="game-header-item frame-gold">
-          <sup>BEST</sup>
-          <span id="best-time-text">00:00:00</span>
+        <div
+          id="best-time"
+          class="game-header-item frame-gold"
+          data-name="best"
+        >
+          00:00:00
         </div>
-        <div class="game-header-item frame-red">
-          <sup>TARGET</sup>
-          <span>
-            <span id="target-current">0</span>
-            <span id="target-divider">/</span>
-            <span id="target-goal">25</span>
-          </span>
+        <div class="game-header-item frame-red" data-name="target">
+          <div id="target-wrapper">
+            <div id="target">0</div>
+            /
+            <div id="goal">25</div>
+          </div>
         </div>
         <div class="game-header-item frame-button">
           <span id="start-button">START</span>
         </div>
-      </div>
+      </header>
       <div id="grid-container" class="flex-column">
         <div id="grid-cover" class="flex-column">
           <div id="cover-restart-button" class="panel button"></div>
         </div>
       </div>
-      <span id="target-goal">25</span>
       <div id="progress-bar"></div>
     </div>
     <script src="index.js"></script>
