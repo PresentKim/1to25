@@ -1,7 +1,3 @@
-var cheat = function () {
-  document.getElementById("cheat-panel").style.display = "block";
-};
-
 var Cell = function (index, data) {
   this.index = index;
   this.control = new ElementControl("cell-" + index, data, CellFomatter);

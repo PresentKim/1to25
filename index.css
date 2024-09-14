@@ -16,7 +16,16 @@ body {
 
 #cheat-panel {
   position: fixed;
-  display: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  z-index: 999;
 }
 
 @keyframes wriggle {
