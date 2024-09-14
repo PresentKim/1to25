@@ -20,6 +20,7 @@
   width: 100%;
   font-weight: bold;
   text-align: center;
+  font-variant-numeric: tabular-nums;
   text-wrap: nowrap;
   padding: calc(var(--frame-width) * 0.5) var(--frame-width);
 }
