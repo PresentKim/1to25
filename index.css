@@ -5,6 +5,7 @@
 @import url(./styles/utilities.css);
 @import url(./styles/container.css);
 @import url(./styles/game-header.css);
+@import url(./styles/game-main.css);
 @import url(./styles/game-footer.css);
 
 body {
@@ -12,71 +13,9 @@ body {
   background: #fbf2eb;
 }
 
-#game {
-  width: 100%;
-  padding: 3rem 1rem;
-}
-
 #cheat-panel {
   position: fixed;
   display: none;
-}
-
-#grid-container {
-  background: #baaaa0;
-  width: 100%;
-  max-width: 568px;
-  margin: 5px auto;
-  border-radius: 10px;
-}
-
-.grid-row {
-  flex: 1;
-  margin: 5px 0;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.grid-cell {
-  flex: 1;
-  color: #777777;
-  background: #eee4da;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 70px;
-  font-weight: bold;
-}
-
-.grid-cell:before {
-  content: "";
-  float: left;
-  padding-top: 100%;
-}
-
-.grid-cell:hover {
-  box-shadow: 0 0 10vmin rgba(255, 255, 255, 0.7);
-}
-
-.grid-cell:active {
-  box-shadow: 0 0 10vmin rgba(255, 255, 0, 0.2);
-}
-
-#grid-cover {
-  position: absolute;
-  background: #777777;
-  opacity: 0;
-  border-radius: 10px;
-  pointer-events: none;
-  justify-content: space-around;
-  align-items: center;
-}
-
-#cover-restart-button {
-  pointer-events: visibleFill;
 }
 
 @keyframes wriggle {

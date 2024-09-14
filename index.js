@@ -26,13 +26,13 @@ var Grid = function (xSize, ySize) {
   this.cells = [];
 
   var id = 0;
-  var gridContainer = document.getElementById("grid-container");
+  var cellContainer = document.getElementById("cell-container");
 
   for (var x = 0; x < this.xSize; x++) {
     var gridRow = createElement("div", {
       class: "grid-row flex-row",
     });
-    gridContainer.appendChild(gridRow);
+    cellContainer.appendChild(gridRow);
 
     for (var y = 0; y < this.ySize; y++) {
       gridRow.appendChild(
@@ -74,7 +74,7 @@ var Game = function (xSize, ySize) {
   this.target = new ElementControl("target", 0);
   this.goal = new ElementControl("goal", 25);
   this.startButton = new ElementControl("start-button", "START");
-  this.gridCover = new ElementControl("grid-cover", "");
+  this.gameCover = new ElementControl("game-main-cover", "");
   this.progressBar = document.getElementById("progress-bar");
 
   this.goal.getElement().addEventListener(
@@ -144,9 +144,9 @@ Game.prototype.start = function () {
 
   this.startButton.setData("STOP");
   document.body.setAttribute("data-game-start", "true");
-  this.gridCover.getElement().style.animation = "";
+  this.gameCover.getElement().style.animation = "";
   setTimeout(function () {
-    game.gridCover.getElement().style.animation = "cover-hide 1s forwards";
+    game.gameCover.getElement().style.animation = "cover-hide 1s forwards";
   }, 10);
 };
 
@@ -160,6 +160,8 @@ Game.prototype.stop = function () {
 
   this.target.setData(0);
   this.startButton.setData("START");
+  this.playTime.setData(0);
+  this.bestTime.setData(this.bestTime.getData());
   this.setProgress(1);
   document.body.setAttribute("data-game-start", "false");
   for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
@@ -198,11 +200,11 @@ Game.prototype.clickCell = function (id) {
           game.bestTime.getData() > game.playTime.getData()
         )
           game.bestTime.setData(new Date().getTime() - game.countDownDate);
-        game.gridCover.getElement().style.animation = "";
+        game.gameCover.getElement().style.animation = "";
         setTimeout(function () {
-          game.gridCover.getElement().style.animation =
+          game.gameCover.getElement().style.animation =
             "cover-show 1s forwards";
-          game.gridCover.setData("End!");
+          game.gameCover.setData("End!");
         }, 10);
         game.stop();
         return;
