@@ -140,8 +140,8 @@ Game.prototype.start = function () {
     cell.getElement().disabled = "false";
   }
 
-  this.startButton.getElement().innerText = "STOP";
-
+  this.startButton.setData("STOP");
+  document.body.setAttribute("data-game-start", "true");
   this.gridCover.getElement().style.animation = "";
   setTimeout(function () {
     game.gridCover.getElement().style.animation = "cover-hide 1s forwards";
@@ -158,6 +158,7 @@ Game.prototype.stop = function () {
 
   this.target.setData(0);
   this.startButton.setData("START");
+  document.body.setAttribute("data-game-start", "false");
   for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
 };
 

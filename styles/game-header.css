@@ -60,6 +60,35 @@
   text-wrap: nowrap;
 }
 
+#target-current {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+#target-divider,
+#target-goal {
+  color: #b16d6d;
+}
+
+[data-game-start="false"] #play-time-text {
+  color: #f5e7d8;
+}
+
+[data-game-start="false"] #target-current,
+[data-game-start="false"] #target-divider {
+  display: none;
+}
+
+[data-game-start="false"] #target-goal {
+  color: #b95f5f;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   #game-header {
     display: flex;
@@ -70,10 +99,6 @@
 
   .game-header-item > sup {
     font-size: 1.75rem;
-  }
-
-  .game-header-item > span {
-    font-size: 2rem;
   }
 
   .game-header-item.frame-button > span {
