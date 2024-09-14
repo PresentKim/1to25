@@ -71,10 +71,9 @@ var Game = function (xSize, ySize) {
 
   this.playTime = new ElementControl("play-time-text", 0, TimeFomatter);
   this.bestTime = new ElementControl("best-time-text", 0, TimeFomatter);
-  this.target = new ElementControl("target-text", 0);
-  this.goal = new ElementControl("goal-text", 25);
-  this.restartButton = new ElementControl("restart-button", "New Game");
-  this.sourceButton = new ElementControl("source-button", "SRC");
+  this.target = new ElementControl("target-current", 0);
+  this.goal = new ElementControl("target-goal", 25);
+  this.startButton = new ElementControl("start-button", "START");
   this.gridCover = new ElementControl("grid-cover", "");
 
   this.goal.getElement().addEventListener(
@@ -88,20 +87,12 @@ var Game = function (xSize, ySize) {
     false
   );
 
-  this.restartButton.getElement().addEventListener(
+  this.startButton.getElement().addEventListener(
     "click",
     function () {
       if (game.canStart)
         if (game.started) game.stop();
         else game.start();
-    },
-    false
-  );
-
-  this.sourceButton.getElement().addEventListener(
-    "click",
-    function () {
-      location.href = "https://github.com/PresentKim/1to25";
     },
     false
   );
@@ -149,7 +140,7 @@ Game.prototype.start = function () {
     cell.getElement().disabled = "false";
   }
 
-  this.restartButton.getElement().innerText = "Stop";
+  this.startButton.getElement().innerText = "STOP";
 
   this.gridCover.getElement().style.animation = "";
   setTimeout(function () {
@@ -166,7 +157,7 @@ Game.prototype.stop = function () {
   this.pre_goal = 25;
 
   this.target.setData(0);
-  this.restartButton.setData("NewGame");
+  this.startButton.setData("START");
   for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
 };
 
