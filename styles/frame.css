@@ -36,6 +36,11 @@
   --frame-slice: 9 9 9 9;
 }
 
+.frame.panel2 {
+  --frame-source: url(../assets/frame-panel2.png);
+  --frame-slice: 6 6 6 6;
+}
+
 .frame.progress {
   --frame-source: url(../assets/frame-progress.png);
   --frame-slice: 3 3 3 3;

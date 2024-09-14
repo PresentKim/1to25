@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 #game-main {
-  background: #baaaa0;
   width: 100%;
   max-width: 568px;
   margin: 2rem auto auto auto;
+  padding: 1rem;
 }
 
 .grid-cell {
