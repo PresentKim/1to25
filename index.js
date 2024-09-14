@@ -253,6 +253,10 @@ var CellFomatter = function (data) {
 };
 
 var TimeFomatter = function (data) {
+  if (data === 0) {
+    return "--:--:--";
+  }
+
   var pad2 = function (number) {
     for (var result = number + ""; 2 > result.length; result = "0" + result);
     return result;
