@@ -160,7 +160,7 @@ Game.prototype.stop = function () {
 
   this.target.setData(0);
   this.startButton.setData("START");
-  this.setProgress(100);
+  this.setProgress(1);
   document.body.setAttribute("data-game-start", "false");
   for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
 };
@@ -207,14 +207,14 @@ Game.prototype.clickCell = function (id) {
         game.stop();
         return;
       }
+      game.setProgress(game.target.getData() / game.goal.getData());
       game.target.setData(game.target.getData() + 1);
-      game.setProgress((game.target.getData() / game.goal.getData()) * 100);
     }
   }
 };
 
 Game.prototype.setProgress = function (progress) {
-  this.progressBar.style.setProperty("--progress", `${progress}%`);
+  this.progressBar.style.setProperty("--progress", progress);
 };
 
 // Element Control

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #progress-bar {
-  --progress: 100%;
+  --progress: 1;
   position: relative;
   width: 100%;
   min-width: 10rem;
@@ -10,13 +10,13 @@
 }
 
 #progress-bar::after {
-  --padding-x: 2.5%;
+  --padding-x: 2.25%;
   content: "";
   position: absolute;
-  top: 40%;
+  top: 38%;
   left: calc(var(--padding-x));
-  width: calc(var(--progress) - var(--padding-x) * 2);
-  height: 20%;
+  width: calc(var(--progress) * (100% - var(--padding-x) * 2));
+  height: 24%;
   background-color: #8b9150;
   transition: width 0.3s ease-out;
 }
