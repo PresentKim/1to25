@@ -2,7 +2,17 @@
 
 .frame {
   --frame-width: 1rem;
-  border: var(--frame-width) solid transparent; /* For padding */
+  --frame-ratio: 1;
+  --frame-height: calc(var(--frame-width) * (var(--frame-ratio)));
+
+  /* For padding */
+  border: 0 solid transparent;
+  border-top-width: var(--frame-height);
+  border-bottom-width: var(--frame-height);
+  border-left-width: var(--frame-width);
+  border-right-width: var(--frame-width);
+
+  /* For border-image */
   border-image: var(--frame-source) var(--frame-slice) fill / var(--frame-width)
     var(--frame-width) var(--frame-width) var(--frame-width);
   border-image-repeat: round;
@@ -11,38 +21,45 @@
 .frame.desc-blue {
   --frame-source: url(../assets/frame-desc-blue.png);
   --frame-slice: 3 3 4 3;
+  --frame-ratio: 1 / 2;
   color: #657baa;
 }
 
 .frame.desc-gold {
   --frame-source: url(../assets/frame-desc-gold.png);
   --frame-slice: 3 3 4 3;
+  --frame-ratio: 1 / 2;
   color: #c6a05b;
 }
 
 .frame.desc-red {
   --frame-source: url(../assets/frame-desc-red.png);
   --frame-slice: 3 3 4 3;
+  --frame-ratio: 1 / 2;
   color: #b95f5f;
 }
 
 .frame.button {
   --frame-source: url(../assets/frame-button.png);
   --frame-slice: 3 3 4 3;
+  --frame-ratio: 1 / 1;
   color: #b5b5e5;
 }
 
 .frame.panel {
   --frame-source: url(../assets/frame-panel.png);
   --frame-slice: 9 9 9 9;
+  --frame-ratio: 1 / 2;
 }
 
 .frame.panel2 {
   --frame-source: url(../assets/frame-panel2.png);
   --frame-slice: 6 6 6 6;
+  --frame-ratio: 1 / 1;
 }
 
 .frame.progress {
   --frame-source: url(../assets/frame-progress.png);
   --frame-slice: 3 3 3 3;
+  --frame-ratio: 1 / 1;
 }

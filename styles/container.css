@@ -8,7 +8,6 @@
   width: 100%;
   max-width: 768px;
   margin: calc(var(--frame-width) * 1.5) auto;
-  border-width: var(--frame-width);
   transition: all 0.3s ease-in-out;
   -webkit-user-select: none;
   user-select: none;
