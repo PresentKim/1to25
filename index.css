@@ -5,7 +5,7 @@
 @import url(./styles/utilities.css);
 @import url(./styles/container.css);
 @import url(./styles/game-header.css);
-@import url(./styles/progress-bar.css);
+@import url(./styles/game-footer.css);
 
 body {
   color: #eeeeee;
