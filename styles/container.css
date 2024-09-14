@@ -27,7 +27,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
   #container {
     --frame-width: 2rem;
   }
@@ -36,5 +36,11 @@
 @media (max-width: 480px) {
   #container {
     --frame-width: 1.5rem;
+  }
+}
+
+@media (max-width: 344px) {
+  #container {
+    --frame-width: 1.25rem;
   }
 }

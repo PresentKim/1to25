@@ -5,9 +5,6 @@
   width: 100%;
   max-width: 568px;
   margin: 2rem auto auto auto;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 1rem;
 }
 
 .grid-cell {
@@ -16,12 +13,12 @@
   background: #eee4da;
   margin: 0.25rem;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4rem;
-  font-weight: bold;
+  font-size: 5rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .grid-cell:before {
@@ -51,4 +48,26 @@
 
 #restart-button {
   pointer-events: visibleFill;
+}
+
+@media (max-width: 568px) {
+  .grid-cell {
+    border-radius: 0.25rem;
+    margin: 0.125rem;
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-cell {
+    border-radius: 0.125rem;
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 344px) {
+  .grid-cell {
+    border-radius: 0.125rem;
+    font-size: 1.75rem;
+  }
 }

@@ -22,6 +22,7 @@
   text-align: center;
   font-variant-numeric: tabular-nums;
   text-wrap: nowrap;
+  transition: all 0.3s ease-in-out;
 }
 
 .game-header-item::before {
@@ -61,12 +62,36 @@
   cursor: default;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
   #game-header {
     font-size: 1.75rem;
   }
 
+  .game-header-item {
+    --frame-width: 0.5rem;
+  }
+
   .game-header-item.frame.button {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #game-header {
+    font-size: 1.5rem;
+  }
+
+  .game-header-item.frame.button {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 344px) {
+  #game-header {
+    font-size: 1.25rem;
+  }
+
+  .game-header-item.frame.button {
+    font-size: 1.75rem;
   }
 }
