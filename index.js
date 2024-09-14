@@ -75,6 +75,7 @@ var Game = function (xSize, ySize) {
   this.goal = new ElementControl("target-goal", 25);
   this.startButton = new ElementControl("start-button", "START");
   this.gridCover = new ElementControl("grid-cover", "");
+  this.progressBar = document.getElementById("progress-bar");
 
   this.goal.getElement().addEventListener(
     "click",
@@ -122,6 +123,7 @@ Game.prototype.start = function () {
   this.started = true;
   this.countDownDate = new Date().getTime();
   this.target.setData(1);
+  this.setProgress(0);
 
   var nums = [];
   while (nums.length < this.grid.length) {
@@ -158,6 +160,7 @@ Game.prototype.stop = function () {
 
   this.target.setData(0);
   this.startButton.setData("START");
+  this.setProgress(100);
   document.body.setAttribute("data-game-start", "false");
   for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
 };
@@ -205,8 +208,13 @@ Game.prototype.clickCell = function (id) {
         return;
       }
       game.target.setData(game.target.getData() + 1);
+      game.setProgress((game.target.getData() / game.goal.getData()) * 100);
     }
   }
+};
+
+Game.prototype.setProgress = function (progress) {
+  this.progressBar.style.setProperty("--progress", `${progress}%`);
 };
 
 // Element Control
@@ -273,18 +281,4 @@ var createElement = function (tag, attributes) {
   return element;
 };
 
-var setProgress = function (progress) {
-  const progressBar = document.getElementById("progress-bar");
-  progressBar.style.setProperty("--progress", `${progress}%`);
-};
-
 var game = new Game(5, 5);
-
-/** TEST CODES */
-const progressBar = document.getElementById("progress-bar");
-progressBar.addEventListener("click", (event) => {
-  const box = progressBar.getBoundingClientRect();
-  const clickX = event.clientX - box.x + box.width * 0.025; // Add padding of 5% of the width
-  const progress = Math.min(100, Math.max(0, (clickX / box.width) * 100));
-  setProgress(progress);
-});
