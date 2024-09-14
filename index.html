@@ -13,57 +13,36 @@
   <body>
     <div id="cheat-panel" class="panel">C</div>
     <div id="container">
-      <div id="container-background">
-        <div id="container-border" class="pixelart">
-          <img src="./assets/border.png" alt="" />
-          <img src="./assets/border.png" alt="" />
-          <img src="./assets/border.png" alt="" />
-          <img src="./assets/border.png" alt="" />
+      <div id="title-container" class="flex-column">
+        <div class="flex-row">
+          <div id="play-time-panel" class="panel">
+            <div class="titled-before">TIME</div>
+            <span id="play-time-text" class="titled-text"></span>
+          </div>
+          <div id="best-time-panel" class="panel">
+            <div class="titled-before">BEST</div>
+            <span id="best-time-text" class="titled-text"></span>
+          </div>
         </div>
-        <img
-          id="title-image"
-          class="pixelart"
-          src="./assets/title.png"
-          alt="one to twenty five title"
-        />
+        <div class="flex-row">
+          <div id="target-panel" class="panel">
+            <div id="goal-text" class="titled-before"></div>
+            <div id="target-text" class="titled-text"></div>
+          </div>
+          <div id="button-container" class="flex-row">
+            <div id="restart-button" class="panel button"></div>
+            <div id="source-button" class="panel button"></div>
+          </div>
+        </div>
+        <span id="intro">● Remove panel from 1 to 25 in order!</span>
       </div>
-      <div id="game" class="flex-column">
-        <div id="title-container" class="flex-column">
-          <div class="flex-row">
-            <div id="play-time-panel" class="panel">
-              <div class="titled-before">TIME</div>
-              <span id="play-time-text" class="titled-text"></span>
-            </div>
-            <div id="best-time-panel" class="panel">
-              <div class="titled-before">BEST</div>
-              <span id="best-time-text" class="titled-text"></span>
-            </div>
-          </div>
-          <div class="flex-row">
-            <div id="target-panel" class="panel">
-              <div id="goal-text" class="titled-before"></div>
-              <div id="target-text" class="titled-text"></div>
-            </div>
-            <div id="button-container" class="flex-row">
-              <div id="restart-button" class="panel button"></div>
-              <div id="source-button" class="panel button"></div>
-            </div>
-          </div>
-          <span id="intro">● Remove panel from 1 to 25 in order!</span>
+      <div id="grid-container" class="flex-column">
+        <div id="grid-cover" class="flex-column">
+          <div id="cover-restart-button" class="panel button"></div>
         </div>
-        <div id="grid-container" class="flex-column">
-          <div id="grid-cover" class="flex-column">
-            <div id="cover-restart-button" class="panel button"></div>
-          </div>
-        </div>
-        <div id="progress-bar" class="flex-column">
-          <img
-            id="progress-bar-background"
-            class="pixelart"
-            src="./assets/progress-bar-background.png"
-            alt="progress-bar"
-          />
-        </div>
+      </div>
+      <div id="progress-bar" class="flex-column">
+        <img src="./assets/progress-bar-background.png" alt="" />
       </div>
     </div>
     <script src="index.js"></script>

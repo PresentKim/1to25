@@ -1,68 +1,43 @@
 @charset "UTF-8";
 
 #container {
+  --border-w: 3rem;
+  --title-w: calc(var(--border-w) * 6);
+  --title-h: calc(var(--title-w) * 18 / 56);
   position: relative;
   width: 100%;
   max-width: 768px;
-  margin: 2rem auto;
-  border: 0.25rem solid #ede4da;
+  margin: calc(var(--border-w) * 1.5) auto;
+  padding: var(--border-w) calc(var(--border-w) * 0.5);
+  border-image: url(../assets/container-border.png) 10 10 10 10 fill /
+    var(--border-w) var(--border-w) var(--border-w) var(--border-w);
+  border-width: var(--border-w);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  transition: all 0.3s ease-in-out;
 }
 
-#container-background {
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  border: 0.25rem solid #353540;
-  background: #bdaa97;
-}
-
-#container-background::before {
+#container::after {
   content: "";
+  background-image: url(../assets/container-title.png);
+  background-size: 100% 100%;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 0.25rem solid #a88b79;
-}
-
-#container-background #title-image {
-  position: absolute;
-  top: -2.5rem;
+  top: calc(var(--title-h) * -0.6);
   left: 50%;
   transform: translateX(-50%);
-  width: 14rem;
+  width: var(--title-w);
+  height: var(--title-h);
+  transition: all 0.3s ease-in-out;
 }
 
-#container-border {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+@media (max-width: 768px) {
+  #container {
+    --border-w: 2rem;
+  }
 }
 
-#container-border img {
-  --inset: -0.0625rem;
-  position: absolute;
-  width: 2rem;
-}
-
-#container-border img:nth-child(1) {
-  top: var(--inset);
-  left: var(--inset);
-}
-
-#container-border img:nth-child(2) {
-  top: var(--inset);
-  right: var(--inset);
-  transform: rotate(90deg);
-}
-
-#container-border img:nth-child(3) {
-  bottom: var(--inset);
-  left: var(--inset);
-  transform: rotate(270deg);
-}
-
-#container-border img:nth-child(4) {
-  bottom: var(--inset);
-  right: var(--inset);
-  transform: rotate(180deg);
+@media (max-width: 480px) {
+  #container {
+    --border-w: 1.5rem;
+  }
 }
