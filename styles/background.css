@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #7aa5b7;
+  z-index: -100;
+}
+
+#background div {
+  content: "";
+  position: absolute;
+  bottom: var(--y);
+  left: var(--x);
+  display: block;
+  list-style: none;
+  width: var(--size);
+  height: var(--size);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10%;
+  animation: background-animation var(--duration) linear;
+}
+
+@keyframes background-animation {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-120vh) rotate(var(--rotate));
+  }
+}
