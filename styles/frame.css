@@ -5,7 +5,7 @@
   border: var(--frame-width) solid transparent; /* For padding */
   border-image: var(--frame-source) var(--frame-slice) fill / var(--frame-width)
     var(--frame-width) var(--frame-width) var(--frame-width);
-  border-image-repeat: repeat;
+  border-image-repeat: round;
 }
 
 .frame.desc-blue {
