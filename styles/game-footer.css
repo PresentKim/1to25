@@ -33,3 +33,12 @@
 #progress-bar-background {
   width: 100%;
 }
+
+#game-version {
+  position: absolute;
+  color: #eee4da;
+  font-size: var(--frame-width);
+  bottom: calc(var(--frame-width) * 0.25);
+  right: calc(var(--frame-width) * 1.5);
+  transition: all 0.3s ease-in;
+}
