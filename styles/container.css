@@ -12,8 +12,6 @@
   border-image: url(../assets/container-border.png) 10 10 10 10 fill /
     var(--border-w) var(--border-w) var(--border-w) var(--border-w);
   border-width: var(--border-w);
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: pixelated;
   transition: all 0.3s ease-in-out;
 }
 
