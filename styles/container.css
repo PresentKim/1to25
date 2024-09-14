@@ -8,7 +8,6 @@
   width: 100%;
   max-width: 768px;
   margin: calc(var(--frame-width) * 1.5) auto;
-  padding: var(--frame-width) calc(var(--frame-width) * 0.5);
   border-width: var(--frame-width);
   transition: all 0.3s ease-in-out;
   -webkit-user-select: none;
@@ -20,7 +19,7 @@
   background-image: url(../assets/container-title.png);
   background-size: 100% 100%;
   position: absolute;
-  top: calc(var(--title-h) * -0.6);
+  top: calc(var(--title-h) * -1.25);
   left: 50%;
   transform: translateX(-50%);
   width: var(--title-w);
