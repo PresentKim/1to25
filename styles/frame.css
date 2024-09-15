@@ -59,6 +59,12 @@
   --frame-ratio: 1 / 1;
 }
 
+.frame.slot {
+  --frame-source: url(../assets/frame-slot.png);
+  --frame-slice: 2 2 3 2;
+  --frame-ratio: 1 / 1;
+}
+
 .frame.progress {
   --frame-source: url(../assets/frame-progress.png);
   --frame-slice: 3 3 3 3;

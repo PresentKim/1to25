@@ -8,17 +8,18 @@
 }
 
 .grid-cell {
+  --frame-width: 0.5rem;
   flex: 1;
-  color: #777777;
-  background: #eee4da;
+  color: #d8d8d8;
   margin: 0.25rem;
   cursor: pointer;
   border-radius: 0.5rem;
+  border-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 5rem;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-out;
 }
 
 .grid-cell:before {
@@ -27,23 +28,39 @@
   padding-top: 100%;
 }
 
-.grid-cell:hover {
-  box-shadow: 0 0 10vmin rgba(255, 255, 255, 0.7);
+.grid-cell:disabled {
+  animation: cell-remove 1s forwards;
 }
 
-.grid-cell:active {
-  box-shadow: 0 0 10vmin rgba(255, 255, 0, 0.2);
+.grid-cell[data-change] {
+  animation: cell-change 2s forwards;
+}
+
+.grid-cell:not(:disabled):hover {
+  color: #ffffff;
+  transform: scale(105%);
+}
+
+.grid-cell:not(:disabled):active {
+  color: hsl(var(--hue), 50%, 80%);
+  transform: scale(110%);
 }
 
 #game-main-cover {
   position: absolute;
-  background: #777777;
-  opacity: 0;
+  background: #d4c2b6;
+  opacity: 1;
   width: 100%;
   height: 100%;
   pointer-events: none;
   justify-content: space-around;
   align-items: center;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 100;
+}
+
+[data-game-start] #game-main-cover {
+  opacity: 0;
 }
 
 #restart-button {
@@ -69,5 +86,45 @@
   .grid-cell {
     border-radius: 0.125rem;
     font-size: 1.75rem;
+  }
+}
+
+@keyframes cell-change {
+  from {
+    opacity: 0.3;
+    font-size: 0;
+    transform: rotateY(0deg);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    font-size: 0;
+    animation-timing-function: ease-out;
+  }
+  80% {
+    font-size: 8vmin;
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(360deg);
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes cell-remove {
+  from {
+    font-size: 0;
+    animation-timing-function: ease-out;
+  }
+  50% {
+    color: #e4dad0;
+    background: #b2a89e;
+  }
+  to {
+    background: #b2aa9e;
+    font-size: 0;
+    transform: rotateY(180deg) scale(75%);
+    cursor: default;
+    filter: grayscale(100%);
+    animation-timing-function: ease-in;
   }
 }

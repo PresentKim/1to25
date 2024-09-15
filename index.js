@@ -1,297 +1,442 @@
-class Cell {
-  constructor(index, data) {
-    this.index = index;
-    this.control = new ElementControl("cell-" + index, data, CellFomatter);
+/**
+ * Wrapper for HTMLElement to control data
+ *
+ * @template T
+ * @typedef {Object} Adaptor<T>
+ * @property {(element: HTMLElement) => T} read
+ * @property {(element: HTMLElement, data: T) => void} write
+ */
+class DataElement {
+  /**
+   * @template T
+   * @param {string} selector - The CSS selector for the element to control
+   * @param {T} data - The data to control
+   * @param {Adaptor<T>} adaptor - The adaptor for the data getter and setter
+   */
+  constructor(selector, data, adaptor) {
+    this.element = document.querySelector(selector);
+    this.adaptor = adaptor || TextAdaptor;
+    this.data = data;
   }
-  setData(data) {
-    this.control.setData(data);
+
+  /**
+   * Get the data controlled by this DataElement
+   * @returns {T} The data controlled by this DataElement
+   */
+  get data() {
+    return this.adaptor.read(this.element);
   }
-  getData() {
-    return this.control.getData();
-  }
-  getElement() {
-    return this.control.element;
+
+  /**
+   * Set the data controlled by this DataElement
+   * @param {T} data - The data to set
+   */
+  set data(data) {
+    this.adaptor.write(this.element, data);
   }
 }
 
+/**
+ * Text Adaptor (Adapts innerText to string)
+ * @type {Adaptor<string>}
+ */
+const TextAdaptor = {
+  /**
+   * @param {HTMLElement} element
+   * @returns {string}
+   */
+  read(element) {
+    return element.innerText;
+  },
+
+  /**
+   * @param {HTMLElement} element
+   * @param {string} text
+   */
+  write(element, text) {
+    element.innerText = text;
+  },
+};
+
+/**
+ * Number Adaptor (Adapts innerText to number)
+ * @type {Adaptor<number>}
+ */
+const NumberAdaptor = {
+  /**
+   * @param {HTMLElement} element
+   * @returns {number}
+   */
+  read(element) {
+    return parseInt(element.innerText) || 0;
+  },
+
+  /**
+   * @param {HTMLElement} element
+   * @param {number} text
+   */
+  write(element, text) {
+    element.innerText = text || 0;
+  },
+};
+
+/**
+ * Cell number Adaptor (Adapts innerText to number, But convert zero to empty string)
+ * @type {Adaptor<number>}
+ */
+const CellAdaptor = {
+  ...NumberAdaptor,
+
+  /**
+   * @param {HTMLElement} element
+   * @param {number} text
+   */
+  write(element, text) {
+    element.innerText = text || "";
+  },
+};
+
+/**
+ * Time Adaptor (Adapts innerText to number, But convert zero to "--:--:--")
+ * @type {Adaptor<number>}
+ */
+const TimeAdaptor = {
+  /**
+   * @param {HTMLElement} element
+   * @returns {number}
+   */
+  read(element) {
+    const time = element.innerText;
+    if (time === "--:--:--") {
+      return 0;
+    }
+
+    const part = time.split(":");
+    return (
+      parseInt(part[0]) * 3600 + parseInt(part[1]) * 60 + parseInt(part[2])
+    );
+  },
+
+  /**
+   * @param {HTMLElement} element
+   * @param {number} time
+   */
+  write(element, time) {
+    if (!time) {
+      element.innerText = "--:--:--";
+      return;
+    }
+
+    const part = (mode, div) => {
+      return Math.floor((time % mode) / div)
+        .toString()
+        .padStart(2, "0");
+    };
+
+    element.innerText =
+      part(1000 * 60 * 60, 1000 * 60) +
+      ":" +
+      part(1000 * 60, 1000) +
+      ":" +
+      part(1000, 10);
+  },
+};
+
+/**
+ * Game Grid
+ * @property {number} xSize - The number of cells in the x direction
+ * @property {number} ySize - The number of cells in the y direction
+ * @property {DataElement[]} cells - The cells of the grid
+ */
 class Grid {
   constructor(xSize, ySize) {
     this.xSize = xSize;
     this.ySize = ySize;
-    this.length = xSize * ySize;
     this.cells = [];
 
-    var id = 0;
-    var cellContainer = document.getElementById("cell-container");
+    // Clear the cell container
+    const cellContainer = document.getElementById("cell-container");
 
-    for (var x = 0; x < this.xSize; x++) {
-      var gridRow = createElement("div", {
+    // Create the grid
+    for (let x = 0; x < this.xSize; x++) {
+      const gridRow = createElement("div", {
         class: "grid-row flex-row",
       });
       cellContainer.appendChild(gridRow);
 
-      for (var y = 0; y < this.ySize; y++) {
+      for (let y = 0; y < this.ySize; y++) {
+        const id = "cell-" + this.cells.length;
         gridRow.appendChild(
-          createElement("div", {
-            id: "cell-" + id,
-            class: "grid-cell",
+          createElement("button", {
+            id,
+            class: "grid-cell frame slot",
           })
         );
 
-        this.cells[id] = new Cell(id, 0);
-        id++;
+        this.cells.push(new DataElement("#" + id, 0, CellAdaptor));
       }
     }
-  }
-  getCells() {
-    return this.cells;
-  }
-  getCell(id) {
-    return this.cells[id];
   }
 }
 
 class Game {
   constructor(xSize, ySize) {
-    this.canStart = true;
-    this.started = false;
+    // Register data elements
+    this["#play-time"] = new DataElement("#play-time", 0, TimeAdaptor);
+    this["#best-time"] = new DataElement("#best-time", 0, TimeAdaptor);
+    this["#target"] = new DataElement("#target", 0, NumberAdaptor);
+    this["#goal"] = new DataElement("#goal", 25, NumberAdaptor);
+    this["#started"] = new DataElement("body", false, {
+      read: (element) => element.hasAttribute("data-game-start"),
+      write: (element, data) =>
+        data
+          ? element.setAttribute("data-game-start", "")
+          : element.removeAttribute("data-game-start"),
+    });
+    this["#progress"] = new DataElement("#progress-bar", 1, {
+      read: (element) =>
+        parseFloat(getComputedStyle(element).getPropertyValue("--progress")) ||
+        0,
+      write: (element, data) => element.style.setProperty("--progress", data),
+    });
+    this.startButton = new DataElement("#start-button", "START");
+
+    // Initialize game data
     this.intervalId = null;
     this.countDownDate = new Date().getTime();
-    this.pre_goal = 25;
+    this.preGoal = 25;
 
+    // Initialize grid
     this.grid = new Grid(xSize, ySize);
-    for (var i = 0; i < this.grid.length; i++)
-      this.grid.cells[i]
-        .getElement()
-        .addEventListener("click", this.clickCell.bind(null, i), false);
+    for (const cell of this.grid.cells) {
+      cell.element.addEventListener("click", () => this.clickCell(cell));
+    }
 
-    this.playTime = new ElementControl("play-time", 0, TimeFomatter);
-    this.bestTime = new ElementControl("best-time", 0, TimeFomatter);
-    this.target = new ElementControl("target", 0);
-    this.goal = new ElementControl("goal", 25);
-    this.startButton = new ElementControl("start-button", "START");
-    this.gameCover = new ElementControl("game-main-cover", "");
-    this.progressBar = document.getElementById("progress-bar");
-
-    this.goal.getElement().addEventListener(
+    // Register click event listeners
+    this["#goal"].element.addEventListener(
       "click",
-      function () {
-        if (!game.started)
-          game.goal.setData(
-            game.goal.getData() >= 100 ? 25 : game.goal.getData() + 25
-          );
+      () => {
+        if (!this.started) {
+          this.goal = this.goal >= 100 ? 25 : this.goal + 25;
+        }
       },
       false
     );
 
-    this.startButton.getElement().addEventListener(
+    this.startButton.element.addEventListener(
       "click",
-      function () {
-        if (game.canStart)
-          if (game.started) game.stop();
-          else game.start();
+      () => {
+        if (this.started) this.stop();
+        else this.start();
       },
       false
     );
 
     document.getElementById("cheat-panel").addEventListener(
       "click",
-      function () {
-        for (i = 0; i < game.grid.length; i++)
-          if (game.target.getData() === game.grid.cells[i].getData()) {
-            game.clickCell(i);
-            break;
-          }
+      () => {
+        const cell = this.grid.cells.find((cell) => cell.data === this.target);
+        if (cell) {
+          this.clickCell(cell);
+        }
       },
       false
     );
   }
+
+  get started() {
+    return this["#started"].data;
+  }
+
+  set started(data) {
+    this["#started"].data = data;
+  }
+
+  get playTime() {
+    return this["#play-time"].data;
+  }
+
+  set playTime(data) {
+    this["#play-time"].data = data;
+  }
+
+  get bestTime() {
+    return this["#best-time"].data;
+  }
+
+  set bestTime(data) {
+    this["#best-time"].data = data;
+  }
+
+  get target() {
+    return this["#target"].data;
+  }
+
+  set target(data) {
+    this["#target"].data = data;
+  }
+
+  get goal() {
+    return this["#goal"].data;
+  }
+
+  set goal(data) {
+    this["#goal"].data = data;
+  }
+
+  get progress() {
+    return this["#progress"].data;
+  }
+
+  set progress(data) {
+    this["#progress"].data = data;
+  }
+
   start() {
+    // If the game is already started, do nothing
+    if (this.started.data) {
+      return;
+    }
+
+    // Start the game
     if (this.intervalId == null)
-      this.intervalId = setInterval(function () {
-        if (game.started) {
-          var time = new Date().getTime() - game.countDownDate;
-          game.playTime.setData(time);
+      this.intervalId = setInterval(() => {
+        if (this.started) {
+          const time = new Date().getTime() - this.countDownDate;
+          this.playTime = time;
         }
       }, 10);
     this.started = true;
     this.countDownDate = new Date().getTime();
-    this.target.setData(1);
-    this.setProgress(0);
+    this.target = 1;
+    this.progress = 0;
+    this.startButton.data = "STOP";
 
-    var nums = [];
-    while (nums.length < this.grid.length) {
-      var rand = Math.ceil(Math.random() * 25);
-      if (nums.indexOf(rand) === -1) nums[nums.length] = rand;
-    }
-    for (var i = 0; i < this.grid.length; i++) {
-      var cell = this.grid.cells[i];
-      cell.setData(nums[i]);
-      cell
-        .getElement()
-        .setAttribute(
-          "style",
-          "color: #777777; background: #" + (i % 2 ? "e4dad0" : "eee4da") + ";"
-        );
-      cell.getElement().disabled = "false";
+    // Generate random index
+    const randomIndex = Array.from(
+      { length: this.grid.cells.length },
+      (_, i) => i
+    ).sort(() => Math.random() - 0.5);
+
+    // Set the numbers in the grid
+    for (const i in this.grid.cells) {
+      const cell = this.grid.cells[i];
+      cell.data = randomIndex[i] + 1;
+      cell.element.disabled = false;
     }
 
+    // Set random hue
     setRandomHue();
-    this.startButton.setData("STOP");
-    document.body.setAttribute("data-game-start", "true");
-    this.gameCover.getElement().style.animation = "";
-    setTimeout(function () {
-      game.gameCover.getElement().style.animation = "cover-hide 1s forwards";
-    }, 10);
   }
+
   stop() {
+    // If the game is not started, do nothing
+    if (!this.started) {
+      return;
+    }
+
+    // Stop the interval
     if (this.intervalId != null) {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
+
+    // Reset the game
     this.started = false;
-    this.pre_goal = 25;
+    this.target = 0;
+    this.preGoal = 25;
+    this.playTime = 0;
+    this.progress = 1;
+    this.startButton.data = "START";
 
-    this.target.setData(0);
-    this.startButton.setData("START");
-    this.playTime.setData(0);
-    this.bestTime.setData(this.bestTime.getData());
-    this.setProgress(1);
-    document.body.setAttribute("data-game-start", "false");
-    for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
+    // Reset the grid
+    for (const cell of this.grid.cells) {
+      cell.data = 0;
+      cell.element.disabled = true;
+    }
   }
-  clickCell(id) {
-    if (game.started) {
-      var cell = game.grid.cells[id];
-      if (game.target.getData() === cell.getData()) {
-        if (
-          game.goal.getData() === game.pre_goal &&
-          cell.getData() <= game.pre_goal
-        ) {
-          cell.getElement().disabled = "true";
-          cell.getElement().style.animation = "";
-          cell.getElement().style.animation = "cell-remove 2s forwards";
-        } else {
-          replace: while (true) {
-            var rand = Math.ceil(Math.random() * 25) + game.pre_goal;
-            for (var i = 0; i < game.grid.length; i++)
-              if (game.grid.cells[i].getData() === rand) continue replace;
-            cell.setData(rand);
-            cell.getElement().disabled = "true";
-            cell.getElement().style.animation = "";
-            setTimeout(function () {
-              cell.getElement().style.animation = "cell-change 2s forwards";
-            }, 10);
-            break;
-          }
+
+  clickCell(cell) {
+    // If the game is not started, do nothing
+    if (!this.started) {
+      return;
+    }
+
+    // If the target is not the cell, do nothing
+    if (this.target !== cell.data) {
+      return;
+    }
+
+    // If the goal is the preGoal and the cell is less than the preGoal, disable the cell
+    if (this.goal === this.preGoal && cell.data <= this.preGoal) {
+      cell.element.disabled = false;
+      cell.element.disabled = true;
+    } else {
+      // Replace the cell with a random number
+      replace: while (true) {
+        const rand = Math.ceil(Math.random() * 25) + this.preGoal;
+        // Check if the random number is already in the grid
+        for (const cell of this.grid.cells) {
+          // If the random number is already in the grid, continue the loop
+          if (cell.data === rand) continue replace;
         }
 
-        if (game.target.getData() === game.pre_goal) game.pre_goal += 25;
-        if (game.target.getData() === game.goal.getData()) {
-          if (
-            game.bestTime.getData() === 0 ||
-            game.bestTime.getData() > game.playTime.getData()
-          )
-            game.bestTime.setData(new Date().getTime() - game.countDownDate);
-          game.gameCover.getElement().style.animation = "";
-          setTimeout(function () {
-            game.gameCover.getElement().style.animation =
-              "cover-show 1s forwards";
-            game.gameCover.setData("End!");
-          }, 10);
-          game.stop();
-          return;
-        }
-        game.setProgress(game.target.getData() / game.goal.getData());
-        game.target.setData(game.target.getData() + 1);
+        // Set the random number to the cell
+        cell.data = rand;
+        cell.element.setAttribute("data-change", "");
+
+        // Remove the data-change attribute when the animation ends
+        const reset = () => {
+          cell.element.removeAttribute("data-change");
+          cell.element.removeEventListener("animationend", reset);
+        };
+        cell.element.addEventListener("animationend", reset);
+        break;
       }
     }
-  }
-  setProgress(progress) {
-    this.progressBar.style.setProperty("--progress", progress);
-  }
-}
 
-// Element Control
-class ElementControl {
-  constructor(elementId, data, fomatter) {
-    this.element = document.getElementById(elementId);
-    this.fomatter = isFunction(fomatter) ? fomatter : DefaultFomatter;
-    this.setData(data ? data : 0);
-  }
-  setData(data, updateOnlyText, fomatter) {
-    if (updateOnlyText !== false) {
-      this.data = data;
+    // Increase the goal
+    if (this.target === this.preGoal) this.preGoal += 25;
+
+    // If the target is the goal, stop the game
+    if (this.target === this.goal) {
+      console.log(this.bestTime, this.playTime);
+      if (this.bestTime === 0 || this.bestTime > this.playTime) {
+        this.bestTime = new Date().getTime() - this.countDownDate;
+      }
+      this.stop();
+      return;
     }
-    this.element.innerText = isFunction(fomatter)
-      ? fomatter(data)
-      : this.fomatter(data);
-  }
-  getData() {
-    return this.data;
-  }
-  getElement() {
-    return this.element;
+
+    // Update the progress bar
+    this.progress = this.target / this.goal;
+    this.target = this.target + 1;
   }
 }
 
-// Fomatters
-var DefaultFomatter = function (data) {
-  return data;
-};
-
-var CellFomatter = function (data) {
-  return data === 0 ? "" : data;
-};
-
-var TimeFomatter = function (data) {
-  if (data === 0) {
-    return "--:--:--";
-  }
-
-  var pad2 = function (number) {
-    for (var result = number + ""; 2 > result.length; result = "0" + result);
-    return result;
-  };
-
-  return (
-    pad2(Math.floor((data % (1000 * 60 * 60)) / (1000 * 60))) +
-    ":" +
-    pad2(Math.floor((data % (1000 * 60)) / 1000)) +
-    ":" +
-    pad2(Math.floor((data % 1000) / 10))
-  );
-};
-
-// other functions
-function isFunction(v) {
-  var getType = {};
-  return v && getType.toString.call(v) === "[object Function]";
-}
-
-var createElement = function (tag, attributes) {
-  var element = document.createElement(tag);
+function createElement(tag, attributes) {
+  const element = document.createElement(tag);
   if (attributes) {
     if (attributes.id !== undefined) element.setAttribute("id", attributes.id);
     if (attributes.class !== undefined)
       element.setAttribute("class", attributes.class);
   }
   return element;
-};
+}
 
-var game = new Game(5, 5);
+const game = new Game(5, 5);
 
 // Set the number of particles based on device width
-var BACKGROUND_PARTICLE_COUNT = Math.min(
+const BACKGROUND_PARTICLE_COUNT = Math.min(
   300,
   Math.floor(window.innerWidth / 2)
 );
 
 // Generate Background Floating Particles
-var background = document.getElementById("background");
-var createParticle = function (initial) {
-  var duration = Math.random() * 3 + 10;
-  var div = createElement("div");
+const background = document.getElementById("background");
+function createParticle(initial) {
+  const duration = Math.random() * 3 + 10;
+  const div = createElement("div");
   div.style.setProperty("--duration", duration + "s");
   div.style.setProperty("--x", Math.random() * 100 + "%");
   div.style.setProperty("--rotate", Math.random() * 720 + "deg");
@@ -304,14 +449,14 @@ var createParticle = function (initial) {
     createParticle();
   });
   background.appendChild(div);
-};
+}
 
-for (var i = 0; i < BACKGROUND_PARTICLE_COUNT; i++) {
+for (let i = 0; i < BACKGROUND_PARTICLE_COUNT; i++) {
   createParticle(true);
 }
 
 // Set random hue on body
-var setRandomHue = function () {
+function setRandomHue() {
   document.body.style.setProperty("--hue", Math.random() * 360);
-};
+}
 setRandomHue();
