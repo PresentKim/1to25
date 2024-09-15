@@ -1,243 +1,239 @@
-var Cell = function (index, data) {
-  this.index = index;
-  this.control = new ElementControl("cell-" + index, data, CellFomatter);
-};
+class Cell {
+  constructor(index, data) {
+    this.index = index;
+    this.control = new ElementControl("cell-" + index, data, CellFomatter);
+  }
+  setData(data) {
+    this.control.setData(data);
+  }
+  getData() {
+    return this.control.getData();
+  }
+  getElement() {
+    return this.control.element;
+  }
+}
 
-Cell.prototype.setData = function (data) {
-  this.control.setData(data);
-};
+class Grid {
+  constructor(xSize, ySize) {
+    this.xSize = xSize;
+    this.ySize = ySize;
+    this.length = xSize * ySize;
+    this.cells = [];
 
-Cell.prototype.getData = function () {
-  return this.control.getData();
-};
+    var id = 0;
+    var cellContainer = document.getElementById("cell-container");
 
-Cell.prototype.getElement = function () {
-  return this.control.element;
-};
+    for (var x = 0; x < this.xSize; x++) {
+      var gridRow = createElement("div", {
+        class: "grid-row flex-row",
+      });
+      cellContainer.appendChild(gridRow);
 
-var Grid = function (xSize, ySize) {
-  this.xSize = xSize;
-  this.ySize = ySize;
-  this.length = xSize * ySize;
-  this.cells = [];
+      for (var y = 0; y < this.ySize; y++) {
+        gridRow.appendChild(
+          createElement("div", {
+            id: "cell-" + id,
+            class: "grid-cell",
+          })
+        );
 
-  var id = 0;
-  var cellContainer = document.getElementById("cell-container");
-
-  for (var x = 0; x < this.xSize; x++) {
-    var gridRow = createElement("div", {
-      class: "grid-row flex-row",
-    });
-    cellContainer.appendChild(gridRow);
-
-    for (var y = 0; y < this.ySize; y++) {
-      gridRow.appendChild(
-        createElement("div", {
-          id: "cell-" + id,
-          class: "grid-cell",
-        })
-      );
-
-      this.cells[id] = new Cell(id, 0);
-      id++;
+        this.cells[id] = new Cell(id, 0);
+        id++;
+      }
     }
   }
-};
-
-Grid.prototype.getCells = function () {
-  return this.cells;
-};
-
-Grid.prototype.getCell = function (id) {
-  return this.cells[id];
-};
-
-var Game = function (xSize, ySize) {
-  this.canStart = true;
-  this.started = false;
-  this.intervalId = null;
-  this.countDownDate = new Date().getTime();
-  this.pre_goal = 25;
-
-  this.grid = new Grid(xSize, ySize);
-  for (var i = 0; i < this.grid.length; i++)
-    this.grid.cells[i]
-      .getElement()
-      .addEventListener("click", this.clickCell.bind(null, i), false);
-
-  this.playTime = new ElementControl("play-time", 0, TimeFomatter);
-  this.bestTime = new ElementControl("best-time", 0, TimeFomatter);
-  this.target = new ElementControl("target", 0);
-  this.goal = new ElementControl("goal", 25);
-  this.startButton = new ElementControl("start-button", "START");
-  this.gameCover = new ElementControl("game-main-cover", "");
-  this.progressBar = document.getElementById("progress-bar");
-
-  this.goal.getElement().addEventListener(
-    "click",
-    function () {
-      if (!game.started)
-        game.goal.setData(
-          game.goal.getData() >= 100 ? 25 : game.goal.getData() + 25
-        );
-    },
-    false
-  );
-
-  this.startButton.getElement().addEventListener(
-    "click",
-    function () {
-      if (game.canStart)
-        if (game.started) game.stop();
-        else game.start();
-    },
-    false
-  );
-
-  document.getElementById("cheat-panel").addEventListener(
-    "click",
-    function () {
-      for (i = 0; i < game.grid.length; i++)
-        if (game.target.getData() === game.grid.cells[i].getData()) {
-          game.clickCell(i);
-          break;
-        }
-    },
-    false
-  );
-};
-
-Game.prototype.start = function () {
-  if (this.intervalId == null)
-    this.intervalId = setInterval(function () {
-      if (game.started) {
-        var time = new Date().getTime() - game.countDownDate;
-        game.playTime.setData(time);
-      }
-    }, 10);
-  this.started = true;
-  this.countDownDate = new Date().getTime();
-  this.target.setData(1);
-  this.setProgress(0);
-
-  var nums = [];
-  while (nums.length < this.grid.length) {
-    var rand = Math.ceil(Math.random() * 25);
-    if (nums.indexOf(rand) === -1) nums[nums.length] = rand;
+  getCells() {
+    return this.cells;
   }
-  for (var i = 0; i < this.grid.length; i++) {
-    var cell = this.grid.cells[i];
-    cell.setData(nums[i]);
-    cell
-      .getElement()
-      .setAttribute(
-        "style",
-        "color: #777777; background: #" + (i % 2 ? "e4dad0" : "eee4da") + ";"
-      );
-    cell.getElement().disabled = "false";
+  getCell(id) {
+    return this.cells[id];
   }
+}
 
-  setRandomHue();
-  this.startButton.setData("STOP");
-  document.body.setAttribute("data-game-start", "true");
-  this.gameCover.getElement().style.animation = "";
-  setTimeout(function () {
-    game.gameCover.getElement().style.animation = "cover-hide 1s forwards";
-  }, 10);
-};
-
-Game.prototype.stop = function () {
-  if (this.intervalId != null) {
-    clearInterval(this.intervalId);
+class Game {
+  constructor(xSize, ySize) {
+    this.canStart = true;
+    this.started = false;
     this.intervalId = null;
+    this.countDownDate = new Date().getTime();
+    this.pre_goal = 25;
+
+    this.grid = new Grid(xSize, ySize);
+    for (var i = 0; i < this.grid.length; i++)
+      this.grid.cells[i]
+        .getElement()
+        .addEventListener("click", this.clickCell.bind(null, i), false);
+
+    this.playTime = new ElementControl("play-time", 0, TimeFomatter);
+    this.bestTime = new ElementControl("best-time", 0, TimeFomatter);
+    this.target = new ElementControl("target", 0);
+    this.goal = new ElementControl("goal", 25);
+    this.startButton = new ElementControl("start-button", "START");
+    this.gameCover = new ElementControl("game-main-cover", "");
+    this.progressBar = document.getElementById("progress-bar");
+
+    this.goal.getElement().addEventListener(
+      "click",
+      function () {
+        if (!game.started)
+          game.goal.setData(
+            game.goal.getData() >= 100 ? 25 : game.goal.getData() + 25
+          );
+      },
+      false
+    );
+
+    this.startButton.getElement().addEventListener(
+      "click",
+      function () {
+        if (game.canStart)
+          if (game.started) game.stop();
+          else game.start();
+      },
+      false
+    );
+
+    document.getElementById("cheat-panel").addEventListener(
+      "click",
+      function () {
+        for (i = 0; i < game.grid.length; i++)
+          if (game.target.getData() === game.grid.cells[i].getData()) {
+            game.clickCell(i);
+            break;
+          }
+      },
+      false
+    );
   }
-  this.started = false;
-  this.pre_goal = 25;
+  start() {
+    if (this.intervalId == null)
+      this.intervalId = setInterval(function () {
+        if (game.started) {
+          var time = new Date().getTime() - game.countDownDate;
+          game.playTime.setData(time);
+        }
+      }, 10);
+    this.started = true;
+    this.countDownDate = new Date().getTime();
+    this.target.setData(1);
+    this.setProgress(0);
 
-  this.target.setData(0);
-  this.startButton.setData("START");
-  this.playTime.setData(0);
-  this.bestTime.setData(this.bestTime.getData());
-  this.setProgress(1);
-  document.body.setAttribute("data-game-start", "false");
-  for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
-};
+    var nums = [];
+    while (nums.length < this.grid.length) {
+      var rand = Math.ceil(Math.random() * 25);
+      if (nums.indexOf(rand) === -1) nums[nums.length] = rand;
+    }
+    for (var i = 0; i < this.grid.length; i++) {
+      var cell = this.grid.cells[i];
+      cell.setData(nums[i]);
+      cell
+        .getElement()
+        .setAttribute(
+          "style",
+          "color: #777777; background: #" + (i % 2 ? "e4dad0" : "eee4da") + ";"
+        );
+      cell.getElement().disabled = "false";
+    }
 
-Game.prototype.clickCell = function (id) {
-  if (game.started) {
-    var cell = game.grid.cells[id];
-    if (game.target.getData() === cell.getData()) {
-      if (
-        game.goal.getData() === game.pre_goal &&
-        cell.getData() <= game.pre_goal
-      ) {
-        cell.getElement().disabled = "true";
-        cell.getElement().style.animation = "";
-        cell.getElement().style.animation = "cell-remove 2s forwards";
-      } else {
-        replace: while (true) {
-          var rand = Math.ceil(Math.random() * 25) + game.pre_goal;
-          for (var i = 0; i < game.grid.length; i++)
-            if (game.grid.cells[i].getData() === rand) continue replace;
-          cell.setData(rand);
+    setRandomHue();
+    this.startButton.setData("STOP");
+    document.body.setAttribute("data-game-start", "true");
+    this.gameCover.getElement().style.animation = "";
+    setTimeout(function () {
+      game.gameCover.getElement().style.animation = "cover-hide 1s forwards";
+    }, 10);
+  }
+  stop() {
+    if (this.intervalId != null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+    this.started = false;
+    this.pre_goal = 25;
+
+    this.target.setData(0);
+    this.startButton.setData("START");
+    this.playTime.setData(0);
+    this.bestTime.setData(this.bestTime.getData());
+    this.setProgress(1);
+    document.body.setAttribute("data-game-start", "false");
+    for (var i = 0; i < this.grid.length; i++) this.grid.cells[i].setData(0);
+  }
+  clickCell(id) {
+    if (game.started) {
+      var cell = game.grid.cells[id];
+      if (game.target.getData() === cell.getData()) {
+        if (
+          game.goal.getData() === game.pre_goal &&
+          cell.getData() <= game.pre_goal
+        ) {
           cell.getElement().disabled = "true";
           cell.getElement().style.animation = "";
-          setTimeout(function () {
-            cell.getElement().style.animation = "cell-change 2s forwards";
-          }, 10);
-          break;
+          cell.getElement().style.animation = "cell-remove 2s forwards";
+        } else {
+          replace: while (true) {
+            var rand = Math.ceil(Math.random() * 25) + game.pre_goal;
+            for (var i = 0; i < game.grid.length; i++)
+              if (game.grid.cells[i].getData() === rand) continue replace;
+            cell.setData(rand);
+            cell.getElement().disabled = "true";
+            cell.getElement().style.animation = "";
+            setTimeout(function () {
+              cell.getElement().style.animation = "cell-change 2s forwards";
+            }, 10);
+            break;
+          }
         }
-      }
 
-      if (game.target.getData() === game.pre_goal) game.pre_goal += 25;
-      if (game.target.getData() === game.goal.getData()) {
-        if (
-          game.bestTime.getData() === 0 ||
-          game.bestTime.getData() > game.playTime.getData()
-        )
-          game.bestTime.setData(new Date().getTime() - game.countDownDate);
-        game.gameCover.getElement().style.animation = "";
-        setTimeout(function () {
-          game.gameCover.getElement().style.animation =
-            "cover-show 1s forwards";
-          game.gameCover.setData("End!");
-        }, 10);
-        game.stop();
-        return;
+        if (game.target.getData() === game.pre_goal) game.pre_goal += 25;
+        if (game.target.getData() === game.goal.getData()) {
+          if (
+            game.bestTime.getData() === 0 ||
+            game.bestTime.getData() > game.playTime.getData()
+          )
+            game.bestTime.setData(new Date().getTime() - game.countDownDate);
+          game.gameCover.getElement().style.animation = "";
+          setTimeout(function () {
+            game.gameCover.getElement().style.animation =
+              "cover-show 1s forwards";
+            game.gameCover.setData("End!");
+          }, 10);
+          game.stop();
+          return;
+        }
+        game.setProgress(game.target.getData() / game.goal.getData());
+        game.target.setData(game.target.getData() + 1);
       }
-      game.setProgress(game.target.getData() / game.goal.getData());
-      game.target.setData(game.target.getData() + 1);
     }
   }
-};
-
-Game.prototype.setProgress = function (progress) {
-  this.progressBar.style.setProperty("--progress", progress);
-};
+  setProgress(progress) {
+    this.progressBar.style.setProperty("--progress", progress);
+  }
+}
 
 // Element Control
-var ElementControl = function (elementId, data, fomatter) {
-  this.element = document.getElementById(elementId);
-  this.fomatter = isFunction(fomatter) ? fomatter : DefaultFomatter;
-  this.setData(data ? data : 0);
-};
-
-ElementControl.prototype.setData = function (data, updateOnlyText, fomatter) {
-  if (updateOnlyText !== false) {
-    this.data = data;
+class ElementControl {
+  constructor(elementId, data, fomatter) {
+    this.element = document.getElementById(elementId);
+    this.fomatter = isFunction(fomatter) ? fomatter : DefaultFomatter;
+    this.setData(data ? data : 0);
   }
-  this.element.innerText = isFunction(fomatter)
-    ? fomatter(data)
-    : this.fomatter(data);
-};
-
-ElementControl.prototype.getData = function () {
-  return this.data;
-};
-
-ElementControl.prototype.getElement = function () {
-  return this.element;
-};
+  setData(data, updateOnlyText, fomatter) {
+    if (updateOnlyText !== false) {
+      this.data = data;
+    }
+    this.element.innerText = isFunction(fomatter)
+      ? fomatter(data)
+      : this.fomatter(data);
+  }
+  getData() {
+    return this.data;
+  }
+  getElement() {
+    return this.element;
+  }
+}
 
 // Fomatters
 var DefaultFomatter = function (data) {
