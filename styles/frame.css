@@ -20,35 +20,35 @@
 
 .frame.desc-blue {
   --frame-source: url(../assets/frame-desc-blue.png);
-  --frame-slice: 3 3 4 3;
+  --frame-slice: 4 3 4 3;
   --frame-ratio: 1 / 2;
   color: #657baa;
 }
 
 .frame.desc-gold {
   --frame-source: url(../assets/frame-desc-gold.png);
-  --frame-slice: 3 3 4 3;
+  --frame-slice: 4 3 4 3;
   --frame-ratio: 1 / 2;
   color: #c6a05b;
 }
 
 .frame.desc-red {
   --frame-source: url(../assets/frame-desc-red.png);
-  --frame-slice: 3 3 4 3;
+  --frame-slice: 4 3 4 3;
   --frame-ratio: 1 / 2;
   color: #b95f5f;
 }
 
 .frame.button {
   --frame-source: url(../assets/frame-button.png);
-  --frame-slice: 3 3 4 3;
+  --frame-slice: 4 4 6 4;
   --frame-ratio: 1 / 1;
   color: #b5b5e5;
 }
 
 .frame.panel {
   --frame-source: url(../assets/frame-panel.png);
-  --frame-slice: 9 9 9 9;
+  --frame-slice: 8 9 9 9;
   --frame-ratio: 1 / 2;
 }
 
