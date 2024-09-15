@@ -284,24 +284,24 @@ var createElement = function (tag, attributes) {
 
 var game = new Game(5, 5);
 
-// Set the number of particles based on device performance
-var BACKGROUND_PARTICLE_COUNT;
-if (navigator.hardwareConcurrency) {
-  BACKGROUND_PARTICLE_COUNT = Math.min(30, navigator.hardwareConcurrency * 2);
-} else {
-  BACKGROUND_PARTICLE_COUNT = 15;
-}
+// Set the number of particles based on device width
+var BACKGROUND_PARTICLE_COUNT = Math.min(
+  300,
+  Math.floor(window.innerWidth / 2)
+);
 
 // Generate Background Floating Particles
 var background = document.getElementById("background");
-var createParticle = function () {
-  var size = Math.random() * 10 + 4;
+var createParticle = function (initial) {
+  var duration = Math.random() * 3 + 10;
   var div = createElement("div");
+  div.style.setProperty("--duration", duration + "s");
   div.style.setProperty("--x", Math.random() * 100 + "%");
-  div.style.setProperty("--y", "-" + size + "rem");
-  div.style.setProperty("--size", size + "rem");
-  div.style.setProperty("--duration", size / 2 + "s");
   div.style.setProperty("--rotate", Math.random() * 720 + "deg");
+  if (initial) {
+    // Set minus animationDelay to make particles start at random time
+    div.style.animationDelay = -duration * Math.random() + "s";
+  }
   div.addEventListener("animationend", function () {
     background.removeChild(div);
     createParticle();
@@ -310,5 +310,5 @@ var createParticle = function () {
 };
 
 for (var i = 0; i < BACKGROUND_PARTICLE_COUNT; i++) {
-  createParticle();
+  createParticle(true);
 }

@@ -13,14 +13,13 @@
 #background div {
   content: "";
   position: absolute;
-  bottom: var(--y);
+  bottom: 0;
   left: var(--x);
   display: block;
   list-style: none;
-  width: var(--size);
-  height: var(--size);
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10%;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
   animation: background-animation var(--duration) linear;
 }
 
