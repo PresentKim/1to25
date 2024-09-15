@@ -137,6 +137,7 @@ Game.prototype.start = function () {
     cell.getElement().disabled = "false";
   }
 
+  setRandomHue();
   this.startButton.setData("STOP");
   document.body.setAttribute("data-game-start", "true");
   this.gameCover.getElement().style.animation = "";
@@ -312,3 +313,9 @@ var createParticle = function (initial) {
 for (var i = 0; i < BACKGROUND_PARTICLE_COUNT; i++) {
   createParticle(true);
 }
+
+// Set random hue on body
+var setRandomHue = function () {
+  document.body.style.setProperty("--hue", Math.random() * 360);
+};
+setRandomHue();

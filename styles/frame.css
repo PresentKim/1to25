@@ -43,7 +43,8 @@
   --frame-source: url(../assets/frame-button.png);
   --frame-slice: 4 4 6 4;
   --frame-ratio: 1 / 1;
-  color: #b5b5e5;
+  color: hsl(var(--hue), 70%, 70%);
+  transition: color 0.3s ease-in-out;
 }
 
 .frame.panel {

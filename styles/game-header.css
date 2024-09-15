@@ -9,7 +9,6 @@
   column-gap: 0.25rem;
   font-size: 2rem;
   width: 100%;
-  color: #080505;
 }
 
 .game-header-item {
@@ -46,7 +45,6 @@
 }
 
 #goal {
-  color: #b95f5f;
   font-weight: bold;
   text-align: center;
   cursor: pointer;

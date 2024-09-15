@@ -6,8 +6,9 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #7aa5b7;
+  background-color: hsl(var(--hue), 50%, 80%);
   z-index: -100;
+  transition: background-color 0.3s ease-in-out;
 }
 
 #background div {
