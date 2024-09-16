@@ -49,7 +49,7 @@
 
 .frame.panel {
   --frame-source: url(../assets/frame-panel.png);
-  --frame-slice: 8 9 9 9;
+  --frame-slice: 9 9 9 9;
   --frame-ratio: 1 / 2;
 }
 
