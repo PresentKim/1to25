@@ -25,11 +25,11 @@
   color: #657baa;
 }
 
-.frame.desc-gold {
-  --frame-source: url(../assets/frame-desc-gold.png);
+.frame.desc-green {
+  --frame-source: url(../assets/frame-desc-green.png);
   --frame-slice: 4 3 4 3;
   --frame-ratio: 1 / 2;
-  color: #c6a05b;
+  color: #4ca672;
 }
 
 .frame.desc-red {
