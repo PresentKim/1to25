@@ -29,11 +29,11 @@
 }
 
 .grid-cell:disabled {
-  animation: cell-remove 1s forwards;
+  animation: cell-remove 1s forwards linear;
 }
 
 .grid-cell[data-change] {
-  animation: cell-change 2s forwards;
+  animation: cell-change 1s forwards linear;
 }
 
 .grid-cell:not(:disabled):hover {
@@ -91,40 +91,29 @@
 
 @keyframes cell-change {
   from {
-    opacity: 0.3;
     font-size: 0;
     transform: rotateY(0deg);
-    animation-timing-function: ease-out;
-  }
-  50% {
-    font-size: 0;
-    animation-timing-function: ease-out;
-  }
-  80% {
-    font-size: 8vmin;
+    cursor: default;
   }
   to {
-    opacity: 1;
     transform: rotateY(360deg);
-    animation-timing-function: ease-in;
+    cursor: pointer;
   }
 }
 
 @keyframes cell-remove {
   from {
     font-size: 0;
-    animation-timing-function: ease-out;
   }
   50% {
     color: #e4dad0;
     background: #b2a89e;
+    transform: rotateY(90deg) scale(90%);
   }
   to {
     background: #b2aa9e;
     font-size: 0;
-    transform: rotateY(180deg) scale(75%);
+    transform: rotateY(180deg) scale(0);
     cursor: default;
-    filter: grayscale(100%);
-    animation-timing-function: ease-in;
   }
 }

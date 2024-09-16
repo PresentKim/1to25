@@ -21,7 +21,7 @@
   width: 4px;
   height: 4px;
   background: #ffffff;
-  animation: background-animation var(--duration) linear;
+  animation: background-animation var(--duration) linear infinite;
 }
 
 @keyframes background-animation {

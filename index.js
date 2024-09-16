@@ -435,19 +435,16 @@ const BACKGROUND_PARTICLE_COUNT = Math.min(
 // Generate Background Floating Particles
 const background = document.getElementById("background");
 function createParticle(initial) {
-  const duration = Math.random() * 3 + 10;
+  const duration = Math.random() * 10 + 30;
   const div = createElement("div");
-  div.style.setProperty("--duration", duration + "s");
-  div.style.setProperty("--x", Math.random() * 100 + "%");
-  div.style.setProperty("--rotate", Math.random() * 720 + "deg");
+  const round10 = (x) => Math.round(x * 10) / 10;
+  div.style.setProperty("--duration", round10(duration) + "s");
+  div.style.setProperty("--x", round10(Math.random() * 100) + "%");
+  div.style.setProperty("--rotate", round10(Math.random() * 720) + "deg");
   if (initial) {
     // Set minus animationDelay to make particles start at random time
-    div.style.animationDelay = -duration * Math.random() + "s";
+    div.style.animationDelay = round10(-duration * Math.random()) + "s";
   }
-  div.addEventListener("animationend", function () {
-    background.removeChild(div);
-    createParticle();
-  });
   background.appendChild(div);
 }
 
