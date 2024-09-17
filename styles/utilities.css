@@ -19,3 +19,30 @@
   image-rendering: -webkit-optimize-contrast;
   image-rendering: pixelated;
 }
+
+.flipper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  backface-visibility: visible;
+  transition: 1s;
+  transform-style: preserve-3d;
+}
+
+.flipper .front {
+  position: absolute;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.flipper .back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.flipper[data-flip="true"] {
+  transform: rotateY(180deg);
+}
